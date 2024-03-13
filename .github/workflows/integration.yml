@@ -38,7 +38,8 @@ jobs:
 jobs:
 
   coding-style:
-
+    name: Run Banana
+    runs-on: ubuntu-latest
   compile:
     runs-on: ubuntu-latest
     steps:
