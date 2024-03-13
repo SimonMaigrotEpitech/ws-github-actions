@@ -35,7 +35,7 @@ jobs:
             fi
             exit 0
 
-jobs: 
+jobs:
 
   coding-style:
 
