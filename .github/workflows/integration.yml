@@ -12,28 +12,27 @@ jobs:
     name: Run Banana
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/epitech/
-      coding-style-checker: latest
+      image: ghcr.io/epitech/coding-style-checker:latest
 
-      steps:
+    steps:
 
-        - name: Checkout GH repo
-          uses: actions/checkout@master
+      - name: Checkout GH repo
+        uses: actions/checkout@master
 
-        - name: Run coding-style checker
-          run:  check.sh $(pwd) $(pwd)
+      - name: Run coding-style checker
+        run:  check.sh $(pwd) $(pwd)
 
-        - name: Report banana result
-          run:  |
-            NB_ERROR=(cat coding-style-reports.log |
-            wc -l)
-            if [ $NB_ERROR -gt 0 ]; then
-              ERROR=$(cat coding-style-reports.log)
-              echo "::error title=$NB_ERROR errors
-              found::$ERROR"
-              exit 1
-            fi
-            exit 0
+      - name: Report banana result
+        run:  |
+          NB_ERROR=(cat coding-style-reports.log |
+          wc -l)
+          if [ $NB_ERROR -gt 0 ]; then
+            ERROR=$(cat coding-style-reports.log)
+            echo "::error title=$NB_ERROR errors
+            found::$ERROR"
+            exit 1
+          fi
+          exit 0
   compile:
     runs-on: ubuntu-latest
     steps:
@@ -52,3 +51,23 @@ jobs:
             exit 1
           fi
           exit 0
+  
+  run-tests:
+    runs-on: ubuntu-latest
+    name: Run Unit & Integration Tests
+    container: epitechcontent/epitest-docker:latest
+    need: [compile, coding-style]
+
+    steps:
+
+      - name: Checkout GH repo
+        uses: actions/checkout@master
+
+      - name: Compile tests binaries
+        run:  make compiles_tests
+
+      - name: Run unit tests
+        run:  ./unit_testing
+
+      - name: Run integration tests
+        run:  ./integration_testing
