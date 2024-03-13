@@ -56,7 +56,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Run Unit & Integration Tests
     container: epitechcontent/epitest-docker:latest
-    need: [compile, coding-style]
+    needs: [compile, coding-style]
 
     steps:
 
