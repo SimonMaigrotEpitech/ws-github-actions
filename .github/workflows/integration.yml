@@ -35,10 +35,7 @@ jobs:
             fi
             exit 0
 
-jobs:
-
-  coding-style:
-    name: Run Banana
+  name: Run Banana
     runs-on: ubuntu-latest
   compile:
     runs-on: ubuntu-latest
