@@ -6,7 +6,7 @@ on:
   pull_request:
     branches-ignore: [ga-ignore-*]
 
-jobs: 
+jobs:
 
   coding-style:
     name: Run Banana
